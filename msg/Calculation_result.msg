@@ -1,0 +1,4 @@
+bool result_bool
+int32 result_int
+float32 result_float
+string result_string

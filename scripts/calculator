@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import importlib
+import time
+import inspect
+import pkgutil
+
+import rospy
+import calculators.comparators
+import rosgraph_monitor.observer
+from rosgraph_monitor.monitor import ModuleManager
+
+
+def iter_namespace(ns_pkg):
+    return pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + ".")
+
+class CalculatorManager(ModuleManager):
+    def __init__(self):
+        super(CalculatorManager,self).__init__()
+
+        self.load_calculators()
+
+    def load_calculators(self):
+        available_plugins = {
+            name: importlib.import_module(name)
+            for finder, name, ispkg
+            in iter_namespace(calculators.comparators)
+        }
+        self._modules = self._get_leaf_nodes(
+            rosgraph_monitor.observer.Observer)
+        
+        print(self._modules)    
+    
+        
+
+if __name__=="__main__":
+    rospy.init_node('araig_calculator')
+
+    manager = CalculatorManager()
+
+    rospy.spin()
