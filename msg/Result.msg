@@ -1,2 +1,2 @@
 Header header
-calculator/Calculation_result calculation_result
+araig_calculator/Calculation_result calculation_result
