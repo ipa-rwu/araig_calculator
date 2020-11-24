@@ -23,7 +23,6 @@ generate_messages(
 
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES observer_camparator
   CATKIN_DEPENDS rospy message_runtime
 #  DEPENDS system_lib
 )
